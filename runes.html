@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Runes - Game Guide</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">GAME <span>GUIDE</span></a>
+    <nav class="nav-buttons">
+      <a href="index.html">Home</a>
+      <a class="active" href="runes.html">Runes</a>
+      <a href="stats-info.html">Stats Info</a>
+      <a href="upgrade-tree.html">Upgrade Tree</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="page-header">
+      <h1>Runes</h1>
+      <p>Choose a rune category. The actual rune entries inside each one are placeholders for now.</p>
+    </div>
+
+    <section class="rune-grid" id="runeGrid"></section>
+  </main>
+
+  <div class="popup" id="runePopup" aria-hidden="true">
+    <div class="popup-box">
+      <div class="popup-top">
+        <h2 id="popupTitle">Rune</h2>
+        <button class="close-btn" onclick="closeRune()" aria-label="Close">×</button>
+      </div>
+      <div class="placeholder-grid" id="placeholderGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    const runeGroups = [
+      { name: "STARTER", className: "starter" },
+      { name: "ADVANCED", className: "advanced" },
+      { name: "PRIME", className: "prime" },
+      { name: "ASCENDANT", className: "ascendant" }
+    ];
+
+    const grid = document.getElementById("runeGrid");
+
+    runeGroups.forEach((rune, index) => {
+      const card = document.createElement("article");
+      card.className = `rune-card ${rune.className}`;
+      card.onclick = () => openRune(index);
+
+      card.innerHTML = `
+        <div class="rune-badge">${rune.name}</div>
+        <p>Click to view this rune section.</p>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    function openRune(index) {
+      const rune = runeGroups[index];
+      document.getElementById("popupTitle").textContent = `${rune.name} RUNE`;
+
+      const holder = document.getElementById("placeholderGrid");
+      holder.innerHTML = "";
+
+      for (let i = 1; i <= 7; i++) {
+        holder.innerHTML += `
+          <div class="placeholder-rune">
+            <div>
+              <strong>Rune Placeholder ${i}</strong>
+              Actual rune name, chance, max, image and stats will go here.
+            </div>
+          </div>
+        `;
+      }
+
+      const popup = document.getElementById("runePopup");
+      popup.classList.add("open");
+      popup.setAttribute("aria-hidden", "false");
+    }
+
+    function closeRune() {
+      const popup = document.getElementById("runePopup");
+      popup.classList.remove("open");
+      popup.setAttribute("aria-hidden", "true");
+    }
+
+    document.getElementById("runePopup").addEventListener("click", (event) => {
+      if (event.target.id === "runePopup") closeRune();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeRune();
+    });
+  </script>
+</body>
+</html>
