@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats Info - Game Guide</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">GAME <span>GUIDE</span></a>
+    <nav class="nav-buttons">
+      <a href="index.html">Home</a>
+      <a href="runes.html">Runes</a>
+      <a class="active" href="stats-info.html">Stats Info</a>
+      <a href="upgrade-tree.html">Upgrade Tree</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="page-header">
+      <h1>Stats Info</h1>
+      <p>This page is ready for the new game's stat caps, requirements, multipliers and notes.</p>
+    </div>
+
+    <div class="search-box">
+      <input id="statSearch" type="text" placeholder="Search stats..." oninput="filterStats()">
+    </div>
+
+    <section id="statsContainer">
+      <div class="info-box stat-entry">
+        <h3>Stat information placeholder</h3>
+        <p>Once you send the new game's stats, I'll rebuild this in the same style as Eternal Stats.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function filterStats() {
+      const q = document.getElementById("statSearch").value.toLowerCase();
+      document.querySelectorAll(".stat-entry").forEach(entry => {
+        entry.style.display = entry.innerText.toLowerCase().includes(q) ? "" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
